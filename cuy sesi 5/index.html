@@ -1,0 +1,94 @@
+<html>
+
+<head></head>
+
+<style>
+    #root {
+        background-color: rgb(2, 91, 61);
+        color: whitesmoke;
+        font-size: 2em;
+        text-align: center;
+        height: 100vh;
+    }
+</style>
+
+<body>
+    <!-- ini konten kita -->
+    <div id="root">
+        <input type="text" placeholder="username" id="usernameInput" />
+        <input type="password" placeholder="password" id="passwordInput" />
+        <button onclick="onLogin()" id="loginButton">LOGIN</button>
+        <button onclick="onLogout()" id="logoutButton">LOGOUT</button>
+        <br />
+        <h1 id="admin">LOGIN SEBAGAI ADMIN</h1>
+        <h1 id="wife">LOGIN SEBAGAI MY BINI</h1>
+    </div>
+
+    <script type="application/javascript">
+
+        let usernameInput = document.getElementById('usernameInput');
+        let passwordInput = document.getElementById('passwordInput');
+        let loginButton = document.getElementById('loginButton');
+        let logoutButton = document.getElementById('logoutButton');
+        let admin = document.getElementById('admin');
+        let wife = document.getElementById('wife');
+
+        admin.style.display = "none";
+        wife.style.display = "none";
+        logoutButton.style.display = "none";
+
+        function onLogin() {
+            localStorage.setItem("username", usernameInput.value);
+            logoutButton.style.display = "block";
+
+            if (usernameInput.value == "admin" && passwordInput.value == "admin123") {
+                
+                localStorage.setItem("role", "admin");
+                usernameInput.style.display = "none"
+                passwordInput.style.display = "none"
+                loginButton.style.display = "none"
+                admin.style.display = "block";
+                wife.style.display = "none";
+            } else {
+                
+                localStorage.setItem("role", "wife");
+                usernameInput.style.display = "none"
+                passwordInput.style.display = "none"
+                loginButton.style.display = "none"
+                wife.style.display = "block";
+                admin.style.display = "none";
+            }
+        }
+
+        if (localStorage.getItem('username')) {
+            usernameInput.style.display = "none"
+            passwordInput.style.display = "none"
+            loginButton.style.display = "none"
+            logoutButton.style.display = "block"
+            if (localStorage.getItem('role') == "admin") {
+                admin.style.display = "block";
+                wife.style.display = "none";
+            } else {
+                admin.style.display = "none";
+                wife.style.display = "block";
+            }
+        }
+
+        function onLogout() {
+            localStorage.clear();
+            location.reload();  
+        }
+        // const myName = "amattttt"
+        // const myHoby = "ngodingg"
+        // let root = document.getElementById('root');
+        // root.textContent = myName + ' ' + myHoby;
+        // root.style.backgroundColor = "brown";
+        // root.style.color = "white";
+        // root.style.fontSize = "2em";
+        // root.style.textAlign = "center";
+        // root.style.height = "100vh";
+
+    </script>
+</body>
+
+</html>
